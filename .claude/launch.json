@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mockups",
+      "runtimeExecutable": "py",
+      "runtimeArgs": ["-m", "http.server", "4321", "--directory", "mockups"],
+      "port": 4321
+    }
+  ]
+}

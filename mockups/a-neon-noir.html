@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volts &amp; Watts — Mockup A: Neon Noir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0c0b;
+    --bg-2: #151311;
+    --card: #1b1916;
+    --line: #2c2823;
+    --text: #f3ede4;
+    --muted: #a59c8f;
+    --amber: #ffb52e;
+    --amber-2: #ff8a00;
+    --glow: 0 0 6px rgba(255,181,46,.9), 0 0 18px rgba(255,150,20,.6), 0 0 40px rgba(255,120,0,.35);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+  h1, h2, h3 { font-family: Oswald, Impact, sans-serif; text-transform: uppercase; letter-spacing: .02em; line-height: 1.05; margin: 0; }
+  .eyebrow { font: 600 12px/1 Inter, sans-serif; letter-spacing: .22em; text-transform: uppercase; color: var(--amber); }
+  .wordmark { font-family: Yellowtail, cursive; color: #ffe2a6; text-shadow: var(--glow); font-size: 30px; text-decoration: none; white-space: nowrap; }
+
+  /* Mockup ribbon */
+  .ribbon { background: var(--amber); color: #111; font: 600 12px/1 Inter; text-align: center; padding: 7px 10px; letter-spacing: .05em; }
+  .ribbon a { color: #111; }
+
+  /* Nav */
+  header.nav { position: sticky; top: 0; z-index: 30; background: rgba(13,12,11,.88); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; gap: 20px; }
+  .nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; font-size: 14px; color: var(--muted); }
+  .nav ul a { text-decoration: none; }
+  .nav ul a:hover { color: var(--text); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font: 600 15px/1 Inter; padding: 14px 22px; border-radius: 6px; text-decoration: none; border: 1px solid transparent; cursor: pointer; }
+  .btn-amber { background: linear-gradient(180deg, var(--amber), var(--amber-2)); color: #1a1000; box-shadow: 0 0 24px rgba(255,150,20,.35); }
+  .btn-ghost { border-color: #4a4238; color: var(--text); background: rgba(255,255,255,.03); }
+  .btn svg { width: 18px; height: 18px; }
+  .nav .btn { padding: 11px 16px; font-size: 14px; }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+  .hero::before { content: ""; position: absolute; inset: 0; background: url(assets/volts-watts-logo.jpg) center/cover no-repeat; opacity: .55; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(13,12,11,.97) 0%, rgba(13,12,11,.85) 42%, rgba(13,12,11,.25) 100%), linear-gradient(0deg, var(--bg) 0%, transparent 30%); }
+  .hero .wrap { position: relative; z-index: 1; padding-top: 110px; padding-bottom: 120px; }
+  .hero h1 { font-size: clamp(42px, 7vw, 84px); max-width: 12ch; }
+  .hero h1 span { color: var(--amber); text-shadow: 0 0 30px rgba(255,150,20,.45); }
+  .hero p.lead { font-size: 19px; color: #d6cdbf; max-width: 520px; margin: 22px 0 32px; }
+  .hero .ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 38px; font-size: 14px; color: var(--muted); }
+  .chips span::before { content: "⚡"; margin-right: 6px; filter: saturate(1.5); }
+
+  /* Contact bar */
+  .contact-bar { background: var(--bg-2); border-bottom: 1px solid var(--line); }
+  .contact-bar .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .contact-bar a { display: flex; align-items: center; gap: 14px; padding: 22px 18px; text-decoration: none; border-right: 1px solid var(--line); transition: background .2s; }
+  .contact-bar a:first-child { border-left: 1px solid var(--line); }
+  .contact-bar a:hover { background: #1f1c18; }
+  .contact-bar svg { width: 26px; height: 26px; color: var(--amber); flex: none; }
+  .contact-bar b { display: block; font: 600 16px/1.2 Oswald; text-transform: uppercase; letter-spacing: .04em; }
+  .contact-bar small { color: var(--muted); font-size: 13px; }
+
+  section { padding: 96px 0; }
+  .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 44px; flex-wrap: wrap; }
+  .section-head h2 { font-size: clamp(32px, 4.5vw, 52px); margin-top: 12px; }
+  .section-head p { color: var(--muted); max-width: 440px; margin: 0; }
+
+  /* Services */
+  .svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .svc { background: var(--card); padding: 30px 26px; position: relative; transition: background .25s; }
+  .svc:hover { background: #221f1a; }
+  .svc:hover .ico { box-shadow: 0 0 22px rgba(255,170,40,.5); }
+  .svc .ico { width: 48px; height: 48px; border-radius: 10px; display: grid; place-items: center; background: rgba(255,181,46,.1); color: var(--amber); border: 1px solid rgba(255,181,46,.25); transition: box-shadow .25s; }
+  .svc .ico svg { width: 24px; height: 24px; }
+  .svc h3 { font-size: 20px; margin: 20px 0 8px; }
+  .svc p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .svc .num { position: absolute; top: 24px; right: 24px; font: 500 12px Oswald; color: #4d463c; }
+
+  /* Commercial */
+  .commercial { background: radial-gradient(ellipse at 80% 20%, rgba(255,140,0,.12), transparent 55%), var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .comm-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; }
+  .comm-grid h2 { font-size: clamp(34px, 4.5vw, 54px); margin: 14px 0 20px; }
+  .comm-grid p { color: #cfc6b8; }
+  .industries { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0 32px; }
+  .industries div { border: 1px solid var(--line); background: rgba(0,0,0,.25); border-radius: 8px; padding: 14px 16px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+  .industries div::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px var(--amber); flex: none; }
+
+  .ph { position: relative; border-radius: 10px; overflow: hidden; background:
+      repeating-linear-gradient(135deg, rgba(255,181,46,.05) 0 12px, transparent 12px 24px), #1a1814;
+      border: 1px dashed #4a4135; display: grid; place-items: center; text-align: center; color: #8d8374; font-size: 13px; min-height: 180px; }
+  .ph svg { width: 34px; height: 34px; color: #6b6153; margin: 0 auto 8px; }
+  .ph b { display: block; color: #c4b8a6; font-weight: 600; }
+  .comm-photos { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 220px 180px; gap: 12px; }
+  .comm-photos .ph:first-child { grid-column: span 2; }
+
+  /* Why */
+  .why-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .why { border-top: 2px solid var(--amber); padding-top: 22px; }
+  .why .big { font: 700 44px/1 Oswald; color: var(--amber); text-shadow: 0 0 20px rgba(255,150,20,.35); }
+  .why h3 { font-size: 18px; margin: 12px 0 8px; }
+  .why p { color: var(--muted); font-size: 14px; margin: 0; }
+
+  /* Work */
+  .work-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 230px 230px; gap: 12px; }
+  .work-grid .ph:first-child { grid-row: span 2; }
+
+  /* Area */
+  .area { border-top: 1px solid var(--line); }
+  .area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .towns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .towns span { border: 1px solid var(--line); padding: 9px 16px; border-radius: 99px; font-size: 14px; background: var(--card); }
+  .towns span.hq { border-color: var(--amber); color: var(--amber); box-shadow: 0 0 16px rgba(255,150,20,.25); }
+  .radar { aspect-ratio: 1; max-width: 440px; margin-left: auto; width: 100%; position: relative; border-radius: 50%;
+     background: radial-gradient(circle, rgba(255,181,46,.18) 0 6%, transparent 6.5%), repeating-radial-gradient(circle, transparent 0 18%, rgba(255,181,46,.18) 18% 18.4%), #12100e; border: 1px solid var(--line); }
+  .radar span { position: absolute; font-size: 12px; color: var(--muted); transform: translate(-50%,-50%); white-space: nowrap; }
+  .radar span::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--amber); margin-right: 6px; vertical-align: middle; }
+  .radar .c { color: var(--amber); font-weight: 600; font-size: 14px; }
+
+  /* Estimate */
+  .estimate { background: linear-gradient(180deg, var(--bg) 0%, #19140c 100%); border-top: 1px solid var(--line); }
+  .est-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; }
+  .est-grid h2 { font-size: clamp(36px, 5vw, 58px); margin: 14px 0 18px; }
+  .est-grid .alt { margin-top: 30px; display: grid; gap: 10px; }
+  .est-grid .alt a { display: flex; align-items: center; gap: 12px; text-decoration: none; padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+  .est-grid .alt svg { width: 20px; height: 20px; color: var(--amber); }
+  form { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  form .full { grid-column: span 2; }
+  label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+  input, select, textarea { width: 100%; background: #0f0e0c; border: 1px solid #383229; border-radius: 6px; color: var(--text); padding: 12px 14px; font: 15px Inter; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px rgba(255,181,46,.18); }
+  textarea { min-height: 110px; resize: vertical; }
+  .seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid #383229; border-radius: 6px; overflow: hidden; }
+  .seg input { display: none; }
+  .seg label { margin: 0; text-align: center; padding: 12px; cursor: pointer; color: var(--text); font-size: 14px; }
+  .seg input:checked + label { background: var(--amber); color: #1a1000; font-weight: 600; }
+  .radios { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; }
+  .radios label { display: flex; align-items: center; gap: 7px; color: var(--text); margin: 0; }
+  .radios input { width: auto; accent-color: var(--amber); }
+  .upload { border: 1px dashed #4a4135; border-radius: 6px; padding: 14px; font-size: 13px; color: var(--muted); text-align: center; }
+
+  footer { border-top: 1px solid var(--line); padding: 50px 0 110px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; align-items: center; }
+
+  /* Mobile sticky bar */
+  .mbar { display: none; }
+
+  @media (max-width: 960px) {
+    .nav ul { display: none; }
+    .svc-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .comm-grid, .area-grid, .est-grid { grid-template-columns: 1fr; gap: 36px; }
+    .radar { margin: 0 auto; }
+    .contact-bar .wrap { grid-template-columns: 1fr 1fr; }
+    .contact-bar a:nth-child(3) { border-left: 1px solid var(--line); }
+    .contact-bar a { border-bottom: 1px solid var(--line); }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    .nav .btn { display: none; }
+    .wordmark { font-size: 26px; }
+    section { padding: 68px 0; }
+    .hero .wrap { padding-top: 70px; padding-bottom: 80px; }
+    .hero::after { background: linear-gradient(0deg, rgba(13,12,11,.98) 15%, rgba(13,12,11,.7) 100%); }
+    .hero .ctas .btn { flex: 1 1 100%; }
+    .contact-bar { display: none; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .industries { grid-template-columns: 1fr; }
+    .work-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 150px 150px; }
+    .work-grid .ph:first-child { grid-column: span 2; grid-row: auto; }
+    form { grid-template-columns: 1fr; padding: 22px; }
+    form .full { grid-column: auto; }
+    .mbar { display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: rgba(18,16,14,.96); backdrop-filter: blur(10px); border-top: 1px solid var(--line); }
+    .mbar a { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 4px 12px; font-size: 11px; font-weight: 600; text-decoration: none; color: var(--text); }
+    .mbar a svg { width: 22px; height: 22px; color: var(--amber); }
+    .mbar a.est { background: var(--amber); color: #1a1000; }
+    .mbar a.est svg { color: #1a1000; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-sms" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.3-.2z"/></symbol>
+  <symbol id="i-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v3l2 1"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h3M13 6h3M8 10h3M13 10h3M8 14h3M13 14h3M8 18h8"/></symbol>
+  <symbol id="i-ev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h14M15 9h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="m10 7-2 4h3l-2 4"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22v-8h6v8"/></symbol>
+  <symbol id="i-gen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="2"/><path d="M6 7V4h4v3M13 10l-2 3h3l-2 3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+</svg>
+
+<div class="ribbon">MOCKUP A · NEON NOIR — brand-faithful dark industrial · <a href="index.html">← all mockups</a></div>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#" class="wordmark">Volts&amp;Watts</a>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#commercial">Commercial</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Our Work</a></li>
+      <li><a href="#areas">Service Areas</a></li>
+    </ul>
+    <a class="btn btn-amber" href="tel:+13125454972"><svg><use href="#i-phone"/></svg>(312) 545-4972</a>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div class="eyebrow">Naperville &amp; the Western Suburbs</div>
+    <h1 style="margin-top:18px">Residential &amp; Commercial <span>Electrical</span> Done Right.</h1>
+    <p class="lead">Licensed and bonded electricians with 20+ years of experience. Family-owned, detail-obsessed, and ready to light up your next project.</p>
+    <div class="ctas">
+      <a class="btn btn-amber" href="#estimate"><svg><use href="#i-form"/></svg>Request an Estimate</a>
+      <a class="btn btn-ghost" href="tel:+13125454972"><svg><use href="#i-phone"/></svg>Call Now</a>
+    </div>
+    <div class="chips"><span>20+ Years Experience</span><span>Licensed &amp; Bonded</span><span>Family-Owned</span><span>Residential + Commercial</span></div>
+  </div>
+</section>
+
+<nav class="contact-bar" aria-label="Quick contact">
+  <div class="wrap">
+    <a href="tel:+13125454972"><svg><use href="#i-phone"/></svg><span><b>Call</b><small>(312) 545-4972</small></span></a>
+    <a href="sms:+13125454972"><svg><use href="#i-sms"/></svg><span><b>Text</b><small>Send us a photo</small></span></a>
+    <a href="https://wa.me/13125454972?text=Hi%20Volts%20%26%20Watts%2C%20I%27d%20like%20to%20request%20an%20estimate."><svg><use href="#i-wa"/></svg><span><b>WhatsApp</b><small>Chat with us</small></span></a>
+    <a href="#estimate"><svg><use href="#i-form"/></svg><span><b>Estimate</b><small>Quick 1-minute form</small></span></a>
+  </div>
+</nav>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="eyebrow">What we do</div><h2>Core Services</h2></div>
+      <p>From a flickering fixture to a full panel upgrade — one call covers it. Every job done to code and built to last.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><span class="num">01</span><div class="ico"><svg><use href="#i-search"/></svg></div><h3>Troubleshooting</h3><p>Fast diagnosis of tripping breakers, dead outlets and mystery faults.</p></div>
+      <div class="svc"><span class="num">02</span><div class="ico"><svg><use href="#i-panel"/></svg></div><h3>Panel Upgrades</h3><p>Modern, safe service panels with load calculations done right.</p></div>
+      <div class="svc"><span class="num">03</span><div class="ico"><svg><use href="#i-ev"/></svg></div><h3>EV Charging</h3><p>Level 2 home and commercial charger installs with dedicated circuits.</p></div>
+      <div class="svc"><span class="num">04</span><div class="ico"><svg><use href="#i-bulb"/></svg></div><h3>Lighting</h3><p>Repairs, recessed, landscape and commercial lighting installs.</p></div>
+      <div class="svc"><span class="num">05</span><div class="ico"><svg><use href="#i-home"/></svg></div><h3>Remodel Electrical</h3><p>Kitchens, basements, baths and bedrooms — wired for how you live.</p></div>
+      <div class="svc"><span class="num">06</span><div class="ico"><svg><use href="#i-gen"/></svg></div><h3>Generators</h3><p>Standby generator installation to keep the power on.</p></div>
+      <div class="svc"><span class="num">07</span><div class="ico"><svg><use href="#i-wrench"/></svg></div><h3>Commercial Maintenance</h3><p>Recurring maintenance plans that prevent costly downtime.</p></div>
+      <div class="svc"><span class="num">08</span><div class="ico"><svg><use href="#i-alert"/></svg></div><h3>Emergency Service</h3><p>Urgent electrical problems handled quickly. <em>[availability TBD]</em></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="commercial" id="commercial">
+  <div class="wrap comm-grid">
+    <div>
+      <div class="eyebrow">For businesses</div>
+      <h2>Commercial Power You Can Count On</h2>
+      <p>Downtime costs money. We keep restaurants, warehouses, retail stores and gas stations running with responsive repairs and scheduled maintenance — so your electrical is the last thing you worry about.</p>
+      <div class="industries">
+        <div>Restaurants</div><div>Warehouses</div><div>Retail Facilities</div><div>Gas Stations</div><div>Commercial Properties</div><div>Maintenance Contracts</div>
+      </div>
+      <a class="btn btn-amber" href="#estimate">Talk Commercial Service</a>
+    </div>
+    <div class="comm-photos">
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Commercial panel photo</b>Real job-site photo goes here</div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Restaurant / retail job</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Warehouse lighting</b></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="eyebrow">Why Volts &amp; Watts</div><h2>Wired Different</h2></div>
+      <p>We treat every home and business like it's our own family's. That's not a slogan — it's how we've worked for two decades.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why"><div class="big">20+</div><h3>Years Experience</h3><p>Two decades of residential and commercial work.</p></div>
+      <div class="why"><div class="big">✓</div><h3>Licensed &amp; Bonded</h3><p>[License wording / number to confirm]</p></div>
+      <div class="why"><div class="big">♥</div><h3>Family-Owned</h3><p>You talk to the people who do the work.</p></div>
+      <div class="why"><div class="big">⚒</div><h3>Workmanship Warranty</h3><p>[Warranty terms to confirm]</p></div>
+      <div class="why"><div class="big">⌂</div><h3>Local Knowledge</h3><p>Naperville-based, suburbs-wide.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="work" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="eyebrow">Recent work</div><h2>Real Jobs. Real Photos.</h2></div>
+      <p>No stock photography — just our trucks, our crew and our finished work.</p>
+    </div>
+    <div class="work-grid">
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Work truck photo</b>Hero-size feature image</div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>EV charger install</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Panel upgrade</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Kitchen remodel</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Generator install</b></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="area" id="areas">
+  <div class="wrap area-grid">
+    <div>
+      <div class="eyebrow">Service area</div>
+      <h2 style="font-size:clamp(32px,4.5vw,52px);margin-top:12px">Centered on Naperville</h2>
+      <p style="color:var(--muted);max-width:460px">Serving homes and businesses across DuPage, Will and Kane counties. Don't see your town? Call — we probably cover it.</p>
+      <div class="towns">
+        <span class="hq">Naperville</span><span>Plainfield</span><span>Wheaton</span><span>Lisle</span><span>Aurora</span><span>Oswego</span><span>Woodridge</span><span>Glen Ellyn</span><span>Will County</span>
+      </div>
+    </div>
+    <div class="radar" aria-hidden="true">
+      <span class="c" style="left:50%;top:50%">Naperville</span>
+      <span style="left:62%;top:22%">Wheaton</span>
+      <span style="left:80%;top:30%">Glen Ellyn</span>
+      <span style="left:76%;top:44%">Lisle</span>
+      <span style="left:82%;top:60%">Woodridge</span>
+      <span style="left:22%;top:42%">Aurora</span>
+      <span style="left:24%;top:70%">Oswego</span>
+      <span style="left:46%;top:78%">Plainfield</span>
+      <span style="left:70%;top:86%">Will County</span>
+    </div>
+  </div>
+</section>
+
+<section class="estimate" id="estimate">
+  <div class="wrap est-grid">
+    <div>
+      <div class="eyebrow">Free estimate</div>
+      <h2>Tell Us What You Need</h2>
+      <p style="color:#cfc6b8">Takes about a minute. We'll reach out the way you prefer [response time TBD].</p>
+      <div class="alt">
+        <a href="tel:+13125454972"><svg><use href="#i-phone"/></svg>Rather talk? Call (312) 545-4972</a>
+        <a href="sms:+13125454972"><svg><use href="#i-sms"/></svg>Text us a photo of the problem</a>
+        <a href="https://wa.me/13125454972?text=Hi%20Volts%20%26%20Watts%2C%20I%27d%20like%20to%20request%20an%20estimate."><svg><use href="#i-wa"/></svg>Message us on WhatsApp</a>
+      </div>
+    </div>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Mockup — not wired yet';">
+      <div class="full">
+        <label>Project type</label>
+        <div class="seg"><input type="radio" name="t" id="a-res" checked><label for="a-res">Residential</label><input type="radio" name="t" id="a-com"><label for="a-com">Commercial</label></div>
+      </div>
+      <div><label for="a-name">Name</label><input id="a-name" placeholder="Your name"></div>
+      <div><label for="a-phone">Phone</label><input id="a-phone" type="tel" placeholder="(630) 555-0123"></div>
+      <div class="full"><label for="a-email">Email</label><input id="a-email" type="email" placeholder="you@example.com"></div>
+      <div class="full"><label for="a-svc">Service needed</label>
+        <select id="a-svc"><option>Choose a service…</option><option>Troubleshooting</option><option>Panel upgrade</option><option>EV charger</option><option>Lighting</option><option>Remodel electrical</option><option>Generator</option><option>Commercial maintenance</option><option>Emergency service</option><option>Other</option></select></div>
+      <div class="full"><label for="a-desc">Project / problem description</label><textarea id="a-desc" placeholder="What's going on? Address or town helps too."></textarea></div>
+      <div class="full"><label>Preferred contact</label>
+        <div class="radios"><label><input type="radio" name="c" checked>Call</label><label><input type="radio" name="c">Text</label><label><input type="radio" name="c">WhatsApp</label><label><input type="radio" name="c">Email</label></div></div>
+      <div class="full upload">📎 Photo upload — optional, Phase 2</div>
+      <div class="full"><button class="btn btn-amber" style="width:100%">Request My Estimate</button></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="#" class="wordmark">Volts&amp;Watts</a>
+    <div>Licensed &amp; Bonded · [License # TBD] · Naperville, IL</div>
+    <a href="tel:+13125454972" style="color:var(--amber);font-weight:600;text-decoration:none">(312) 545-4972</a>
+  </div>
+</footer>
+
+<nav class="mbar" aria-label="Mobile contact">
+  <a href="tel:+13125454972"><svg><use href="#i-phone"/></svg>Call</a>
+  <a href="sms:+13125454972"><svg><use href="#i-sms"/></svg>Text</a>
+  <a href="https://wa.me/13125454972?text=Hi%20Volts%20%26%20Watts%2C%20I%27d%20like%20to%20request%20an%20estimate."><svg><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="est" href="#estimate"><svg><use href="#i-form"/></svg>Estimate</a>
+</nav>
+</body>
+</html>

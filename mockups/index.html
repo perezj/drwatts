@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volts &amp; Watts Mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Yellowtail&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0e0d0c; --card: #191714; --line: #2c2823; --text: #f2ece3; --muted: #a39a8c; --amber: #ffb52e; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 Inter, system-ui, sans-serif; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 56px 16px 80px; }
+  .wm { font: 46px/1 Yellowtail, cursive; color: #ffe2a6; text-shadow: 0 0 6px rgba(255,181,46,.9), 0 0 20px rgba(255,140,0,.5); }
+  h1 { font-size: clamp(26px, 4vw, 38px); margin: 14px 0 8px; letter-spacing: -.02em; }
+  p.sub { color: var(--muted); margin: 0 0 40px; max-width: 640px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  a.card { display: block; text-decoration: none; color: inherit; background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: transform .2s, border-color .2s; }
+  a.card:hover { transform: translateY(-4px); border-color: var(--amber); }
+  .sw { height: 150px; position: relative; display: grid; place-items: center; }
+  .sw span { font-weight: 800; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px; border-radius: 99px; }
+  .body { padding: 22px; }
+  .body h2 { margin: 0 0 4px; font-size: 21px; }
+  .body .for { color: var(--amber); font-size: 13px; font-weight: 600; margin-bottom: 10px; }
+  .body p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .note { margin-top: 36px; color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 20px; }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="wm">Volts&amp;Watts</div>
+  <h1>Homepage mockups: three directions</h1>
+  <p class="sub">Each mockup has every homepage section from the proposal: hero, fast-contact bar, core services, commercial, why us, recent work, service area and the estimate form. Each also has a sticky Call / Text / WhatsApp / Estimate bar on mobile. Photo slots are labeled placeholders until real job photos arrive.</p>
+  <div class="grid">
+    <a class="card" href="a-neon-noir.html">
+      <div class="sw" style="background:radial-gradient(circle at 50% 60%, rgba(255,150,20,.35), transparent 60%), #0d0c0b"><span style="background:#ffb52e;color:#1a1000">A · Neon Noir</span></div>
+      <div class="body"><h2>Neon Noir</h2><div class="for">Best for: brand fidelity</div><p>Uses the glowing-bulb logo as the full-bleed hero. Charcoal with an amber glow and Oswald headlines. This is the proposal's recommended "premium dark industrial" look, almost word for word.</p></div>
+    </a>
+    <a class="card" href="b-blueprint.html">
+      <div class="sw" style="background-color:#101418;background-image:linear-gradient(rgba(120,150,180,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(120,150,180,.12) 1px,transparent 1px);background-size:22px 22px"><span style="background:#f2b705;color:#1b1400">B · Blueprint</span></div>
+      <div class="body"><h2>Blueprint</h2><div class="for">Best for: winning commercial clients</div><p>A technical spec-sheet look with grid lines, condensed type and safety-gold accents. The commercial section comes right after the hero, and services are laid out as a spec table. It's built for facility managers and the recurring-maintenance growth goal.</p></div>
+    </a>
+    <a class="card" href="c-front-porch.html">
+      <div class="sw" style="background:linear-gradient(135deg,#faf7f2,#fef3c7)"><span style="background:#1d1a16;color:#fcd34d">C · Front Porch</span></div>
+      <div class="body"><h2>Front Porch</h2><div class="for">Best for: homeowners &amp; conversion</div><p>Light, warm and approachable, with the estimate form above the fold so it converts fastest. The dark logo becomes a badge, and the commercial section is a single dark band. It reads friendlier to homeowners but is less tied to the logo's mood.</p></div>
+    </a>
+  </div>
+  <p class="note">All three are static HTML with no build step. Once a direction is picked, it gets rebuilt in Astro + Tailwind for Cloudflare Pages, as the proposal specifies. Anything in [brackets], such as license number, warranty terms or emergency hours, is waiting on confirmation from Volts &amp; Watts.</p>
+</div>
+</body>
+</html>

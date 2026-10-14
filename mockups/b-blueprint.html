@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volts &amp; Watts — Mockup B: Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #101418;
+    --bg-2: #161b21;
+    --panel: #1c222a;
+    --line: #2a323c;
+    --grid: rgba(120,150,180,.07);
+    --text: #eef1f4;
+    --muted: #93a0ae;
+    --gold: #f2b705;
+    --gold-ink: #1b1400;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 Barlow, system-ui, sans-serif; overflow-x: hidden; }
+  a { color: inherit; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { font-family: "Barlow Condensed", sans-serif; font-weight: 800; text-transform: uppercase; line-height: .98; margin: 0; letter-spacing: .005em; }
+  .mono { font: 500 12px/1.2 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+  .gridbg { background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 40px 40px; }
+
+  .ribbon { background: var(--gold); color: var(--gold-ink); font: 600 12px/1 Barlow; text-align: center; padding: 7px 10px; letter-spacing: .05em; }
+
+  /* utility bar */
+  .util { background: #0a0d10; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .util .wrap { display: flex; justify-content: space-between; align-items: center; height: 38px; gap: 16px; }
+  .util a { text-decoration: none; color: var(--text); }
+  .util .links { display: flex; gap: 20px; }
+
+  header.nav { position: sticky; top: 0; z-index: 30; background: var(--bg-2); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: stretch; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand .badge { width: 44px; height: 44px; border-radius: 4px; background: #000 url(assets/volts-watts-logo.jpg) 50% 45%/260% no-repeat; border: 1px solid #3a3a30; }
+  .brand .name { font: 800 22px/1 "Barlow Condensed"; text-transform: uppercase; letter-spacing: .04em; }
+  .brand .name small { display: block; font: 500 10px "IBM Plex Mono"; color: var(--muted); letter-spacing: .14em; margin-top: 3px; }
+  .nav ul { display: flex; list-style: none; margin: 0; padding: 0; }
+  .nav ul a { display: flex; align-items: center; height: 100%; padding: 0 18px; text-decoration: none; font: 600 15px "Barlow Condensed"; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-left: 1px solid var(--line); }
+  .nav ul a:hover { color: var(--text); background: var(--panel); }
+  .nav .cta { display: flex; align-items: center; padding: 0 26px; background: var(--gold); color: var(--gold-ink); text-decoration: none; font: 800 17px "Barlow Condensed"; text-transform: uppercase; letter-spacing: .06em; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 16px 26px; font: 700 17px/1 "Barlow Condensed"; text-transform: uppercase; letter-spacing: .07em; text-decoration: none; border: 2px solid transparent; cursor: pointer; }
+  .btn svg { width: 18px; height: 18px; }
+  .btn-gold { background: var(--gold); color: var(--gold-ink); }
+  .btn-line { border-color: #46515e; color: var(--text); }
+  .btn-line:hover { border-color: var(--gold); }
+
+  /* Hero: split with framed logo */
+  .hero { border-bottom: 1px solid var(--line); }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 0; }
+  .hero .copy { padding: 84px 56px 84px 0; border-right: 1px solid var(--line); }
+  .hero h1 { font-size: clamp(48px, 7.4vw, 96px); margin: 18px 0 0; }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero p { font-size: 19px; color: #c3ccd5; max-width: 540px; margin: 24px 0 34px; }
+  .hero .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+  .hero .art { padding: 56px 0 56px 56px; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+  .frame { position: relative; border: 1px solid #3a4450; padding: 10px; }
+  .frame img { display: block; width: 100%; }
+  .frame::before, .frame::after { content: ""; position: absolute; width: 18px; height: 18px; border: 2px solid var(--gold); }
+  .frame::before { top: -6px; left: -6px; border-right: 0; border-bottom: 0; }
+  .frame::after { bottom: -6px; right: -6px; border-left: 0; border-top: 0; }
+  .spec { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); }
+  .spec div { padding: 14px 16px; border-right: 1px solid var(--line); }
+  .spec div:last-child { border-right: 0; }
+  .spec b { display: block; font: 800 30px/1 "Barlow Condensed"; color: var(--gold); }
+  .spec span { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+  /* contact rail */
+  .rail { background: var(--gold); color: var(--gold-ink); }
+  .rail .wrap { display: grid; grid-template-columns: auto repeat(4, 1fr); align-items: stretch; }
+  .rail .lbl { display: flex; align-items: center; padding: 0 26px 0 0; font: 800 20px "Barlow Condensed"; text-transform: uppercase; letter-spacing: .04em; }
+  .rail a { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 10px; text-decoration: none; font: 700 17px "Barlow Condensed"; text-transform: uppercase; letter-spacing: .06em; border-left: 2px solid rgba(0,0,0,.18); }
+  .rail a:hover { background: rgba(0,0,0,.08); }
+  .rail svg { width: 20px; height: 20px; }
+
+  section { padding: 100px 0; }
+  .head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 48px; }
+  .head h2 { font-size: clamp(38px, 5.4vw, 68px); margin-top: 14px; }
+  .head p { color: var(--muted); margin: 0; max-width: 480px; justify-self: end; }
+
+  /* Commercial first */
+  .comm { border-bottom: 1px solid var(--line); }
+  .sectors { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); background: var(--bg-2); }
+  .sector { border-right: 1px solid var(--line); }
+  .sector:last-child { border-right: 0; }
+  .sector .ph { aspect-ratio: 4/5; border: 0; border-bottom: 1px solid var(--line); }
+  .sector .t { padding: 18px 18px 22px; }
+  .sector h3 { font-size: 24px; }
+  .sector p { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
+  .comm-foot { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 28px; padding: 24px 28px; border: 1px dashed #46515e; }
+  .comm-foot p { margin: 0; font-size: 18px; }
+  .comm-foot b { color: var(--gold); }
+
+  .ph { background: repeating-linear-gradient(45deg, rgba(242,183,5,.05) 0 10px, transparent 10px 20px), #141a20; border: 1px dashed #3a4450; display: grid; place-items: center; text-align: center; color: #75818e; font-size: 13px; padding: 10px; }
+  .ph svg { width: 30px; height: 30px; margin: 0 auto 6px; display: block; color: #55606c; }
+  .ph b { display: block; color: #aab5c0; font-weight: 600; }
+
+  /* Services as spec table */
+  .svc-list { border-top: 2px solid var(--gold); }
+  .svc-row { display: grid; grid-template-columns: 80px 56px 1.1fr 2fr 40px; align-items: center; gap: 20px; padding: 22px 8px; border-bottom: 1px solid var(--line); text-decoration: none; transition: background .2s, padding .2s; }
+  .svc-row:hover { background: var(--panel); padding-left: 18px; }
+  .svc-row .n { font: 500 13px "IBM Plex Mono"; color: var(--muted); }
+  .svc-row svg { width: 28px; height: 28px; color: var(--gold); }
+  .svc-row h3 { font-size: 28px; }
+  .svc-row p { margin: 0; color: var(--muted); }
+  .svc-row .arr { font: 700 22px "Barlow Condensed"; color: var(--gold); text-align: right; }
+  .more { margin-top: 22px; font-size: 14px; color: var(--muted); }
+  .more span { display: inline-block; border: 1px solid var(--line); padding: 4px 10px; margin: 4px 4px 0 0; font-size: 13px; }
+
+  /* Why */
+  .why { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .why-grid { display: grid; grid-template-columns: repeat(5, 1fr); border: 1px solid var(--line); }
+  .why-grid > div { padding: 30px 24px; border-right: 1px solid var(--line); }
+  .why-grid > div:last-child { border-right: 0; }
+  .why-grid .k { font: 800 54px/1 "Barlow Condensed"; color: var(--gold); }
+  .why-grid h3 { font-size: 22px; margin: 14px 0 6px; }
+  .why-grid p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  /* Work strip */
+  .work-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 10px; }
+  .work-grid .ph:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .work-grid .ph:nth-child(4) { grid-column: span 2; }
+
+  /* Area + estimate combined */
+  .final { border-top: 1px solid var(--line); }
+  .final .wrap { display: grid; grid-template-columns: 1fr 1.15fr; gap: 0; border: 1px solid var(--line); padding: 0; max-width: 1192px; }
+  .final .area { padding: 48px; border-right: 1px solid var(--line); background: var(--bg-2); }
+  .final h2 { font-size: clamp(36px, 4.6vw, 56px); margin: 14px 0 18px; }
+  .map { position: relative; aspect-ratio: 4/3; border: 1px solid var(--line); margin: 26px 0 22px; }
+  .map svg.roads { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .pin { position: absolute; transform: translate(-50%, -50%); font: 500 11px "IBM Plex Mono"; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); white-space: nowrap; }
+  .pin::before { content: "+"; color: var(--gold); margin-right: 4px; font-weight: 700; }
+  .pin.hq { color: var(--gold-ink); background: var(--gold); padding: 4px 8px; font-weight: 700; }
+  .pin.hq::before { content: "⚡"; color: var(--gold-ink); }
+  .townlist { columns: 3; font-size: 14px; color: #c3ccd5; margin: 0; padding: 0; list-style: none; }
+  .townlist li::before { content: "— "; color: var(--gold); }
+
+  .final .est { padding: 48px; }
+  form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 26px; }
+  form .full { grid-column: span 2; }
+  label { display: block; font: 500 11px "IBM Plex Mono"; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 6px; }
+  input, select, textarea { width: 100%; background: transparent; border: 0; border-bottom: 2px solid #3a4450; color: var(--text); padding: 10px 2px; font: 17px Barlow; border-radius: 0; }
+  select { background: var(--bg); }
+  input:focus, select:focus, textarea:focus { outline: none; border-bottom-color: var(--gold); }
+  textarea { min-height: 90px; resize: vertical; }
+  .toggle { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid #3a4450; }
+  .toggle input { display: none; }
+  .toggle label { margin: 0; text-align: center; padding: 14px; cursor: pointer; color: var(--text); font: 700 16px "Barlow Condensed"; letter-spacing: .08em; }
+  .toggle input:checked + label { background: var(--gold); color: var(--gold-ink); }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pills input { display: none; }
+  .pills label { margin: 0; border: 1px solid #3a4450; padding: 8px 14px; color: var(--text); cursor: pointer; font: 600 14px Barlow; text-transform: none; letter-spacing: 0; }
+  .pills input:checked + label { border-color: var(--gold); color: var(--gold); }
+  .note { font-size: 13px; color: var(--muted); }
+
+  footer { padding: 46px 0 110px; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+  .mbar { display: none; }
+
+  @media (max-width: 1080px) {
+    .nav ul { display: none; }
+    .hero .wrap { grid-template-columns: 1fr; }
+    .hero .copy { padding: 64px 0 24px; border-right: 0; }
+    .hero .art { padding: 0 0 64px; }
+    .sectors { grid-template-columns: repeat(2, 1fr); }
+    .sector { border-bottom: 1px solid var(--line); }
+    .sector:nth-child(5) { grid-column: span 2; }
+    .sector:nth-child(5) .ph { aspect-ratio: 16/6; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .why-grid > div { border-bottom: 1px solid var(--line); }
+    .final .wrap { grid-template-columns: 1fr; margin: 0 24px; }
+    .final .area { border-right: 0; border-bottom: 1px solid var(--line); }
+    .rail .lbl { display: none; }
+    .rail .wrap { grid-template-columns: repeat(4, 1fr); }
+    .rail a:first-child { border-left: 0; }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    .util .links { display: none; }
+    .nav .cta { padding: 0 16px; font-size: 15px; }
+    .brand .name { font-size: 19px; }
+    section { padding: 64px 0; }
+    .head { grid-template-columns: 1fr; gap: 14px; }
+    .head p { justify-self: start; }
+    .hero .ctas .btn { flex: 1 1 100%; }
+    .spec b { font-size: 24px; }
+    .spec span { font-size: 10px; }
+    .rail { display: none; }
+    .sectors { grid-template-columns: 1fr; }
+    .sector { display: grid; grid-template-columns: 110px 1fr; border-right: 0; }
+    .sector:nth-child(5) { grid-column: auto; }
+    .sector .ph, .sector:nth-child(5) .ph { aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--line); min-height: 100px; font-size: 11px; }
+    .sector .ph b { display: none; }
+    .svc-row { grid-template-columns: 34px 1fr 24px; gap: 14px; padding: 18px 4px; }
+    .svc-row .n { display: none; }
+    .svc-row h3 { font-size: 23px; }
+    .svc-row p { grid-column: 2 / 4; font-size: 14px; margin-top: -8px; }
+    .svc-row .arr { grid-row: 1; grid-column: 3; }
+    .why-grid { grid-template-columns: 1fr; }
+    .work-grid { grid-template-columns: 1fr 1fr; grid-auto-rows: 150px; }
+    .final .wrap { margin: 0 16px; }
+    .final .area, .final .est { padding: 28px 20px; }
+    .townlist { columns: 2; }
+    form { grid-template-columns: 1fr; }
+    form .full { grid-column: auto; }
+    .mbar { display: grid; grid-template-columns: repeat(4, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: #0a0d10; border-top: 2px solid var(--gold); }
+    .mbar a { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 10px 4px 12px; text-decoration: none; font: 700 13px "Barlow Condensed"; text-transform: uppercase; letter-spacing: .06em; }
+    .mbar svg { width: 22px; height: 22px; color: var(--gold); }
+    .mbar a.est { background: var(--gold); color: var(--gold-ink); }
+    .mbar a.est svg { color: var(--gold-ink); }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-sms" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.3-.2z"/></symbol>
+  <symbol id="i-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M11 8v3l2 1"/></symbol>
+  <symbol id="i-panel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h3M13 6h3M8 10h3M13 10h3M8 14h3M13 14h3M8 18h8"/></symbol>
+  <symbol id="i-ev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h14M15 9h2a2 2 0 0 1 2 2v4a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="m10 7-2 4h3l-2 4"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22v-8h6v8"/></symbol>
+  <symbol id="i-gen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="12" rx="2"/><path d="M6 7V4h4v3M13 10l-2 3h3l-2 3"/></symbol>
+  <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9z"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+</svg>
+
+<div class="ribbon">MOCKUP B · BLUEPRINT — commercial-forward technical · <a href="index.html" style="color:inherit">← all mockups</a></div>
+
+<div class="util">
+  <div class="wrap">
+    <span>Licensed &amp; Bonded · Serving Naperville + Western Suburbs</span>
+    <div class="links"><a href="sms:+13125454972">Text us</a><a href="https://wa.me/13125454972?text=Hi%20Volts%20%26%20Watts%2C%20I%27d%20like%20to%20request%20an%20estimate.">WhatsApp</a><a href="tel:+13125454972">(312) 545-4972</a></div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#"><span class="badge" aria-hidden="true"></span><span class="name">Volts &amp; Watts<small>ELECTRICAL SERVICES</small></span></a>
+    <ul>
+      <li><a href="#commercial">Commercial</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Our Work</a></li>
+      <li><a href="#areas">Areas</a></li>
+    </ul>
+    <a class="cta" href="#estimate">Get Estimate</a>
+  </div>
+</header>
+
+<section class="hero gridbg" style="padding:0">
+  <div class="wrap">
+    <div class="copy">
+      <div class="mono">// Electrical Contractor — Naperville, IL</div>
+      <h1>Power for the<br>places that <em>can't</em><br>go dark.</h1>
+      <p>Commercial maintenance and repair for restaurants, warehouses, retail and gas stations — plus the same precision work for your home. 20+ years. Licensed and bonded.</p>
+      <div class="ctas">
+        <a class="btn btn-gold" href="#estimate"><svg><use href="#i-form"/></svg>Request an Estimate</a>
+        <a class="btn btn-line" href="tel:+13125454972"><svg><use href="#i-phone"/></svg>Call Now</a>
+      </div>
+    </div>
+    <div class="art">
+      <div class="frame"><img src="assets/volts-watts-logo.jpg" alt="Volts &amp; Watts glowing lightbulb logo" width="1125" height="675"></div>
+      <div class="spec">
+        <div><b>20+</b><span>Years in trade</span></div>
+        <div><b>RES</b><span>+ Commercial</span></div>
+        <div><b>9+</b><span>Communities</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<nav class="rail" aria-label="Quick contact">
+  <div class="wrap">
+    <span class="lbl">Reach us fast →</span>
+    <a href="tel:+13125454972"><svg><use href="#i-phone"/></svg>Call</a>
+    <a href="sms:+13125454972"><svg><use href="#i-sms"/></svg>Text</a>
+    <a href="https://wa.me/13125454972?text=Hi%20Volts%20%26%20Watts%2C%20I%27d%20like%20to%20request%20an%20estimate."><svg><use href="#i-wa"/></svg>WhatsApp</a>
+    <a href="#estimate"><svg><use href="#i-form"/></svg>Estimate</a>
+  </div>
+</nav>
+
+<section class="comm" id="commercial">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="mono">01 / Commercial</div><h2>Built for<br>businesses</h2></div>
+      <p>Scheduled maintenance, fast repairs and code-compliant upgrades for facilities that need to stay open. One electrical partner for every location.</p>
+    </div>
+    <div class="sectors">
+      <div class="sector"><div class="ph"><div><svg><use href="#i-cam"/></svg><b>Restaurant job photo</b></div></div><div class="t"><h3>Restaurants</h3><p>Kitchen circuits, hoods, coolers.</p></div></div>
+      <div class="sector"><div class="ph"><div><svg><use href="#i-cam"/></svg><b>Warehouse photo</b></div></div><div class="t"><h3>Warehouses</h3><p>High-bay lighting, power distribution.</p></div></div>
+      <div class="sector"><div class="ph"><div><svg><use href="#i-cam"/></svg><b>Retail photo</b></div></div><div class="t"><h3>Retail</h3><p>Fit-outs, signage, lighting.</p></div></div>
+      <div class="sector"><div class="ph"><div><svg><use href="#i-cam"/></svg><b>Gas station photo</b></div></div><div class="t"><h3>Gas Stations</h3><p>Canopy lights, pumps, panels.</p></div></div>
+      <div class="sector"><div class="ph"><div><svg><use href="#i-cam"/></svg><b>Commercial panel</b></div></div><div class="t"><h3>Facilities</h3><p>Larger commercial properties.</p></div></div>
+    </div>
+    <div class="comm-foot">
+      <p>Need a <b>recurring maintenance partner</b>? Ask about scheduled service plans.</p>
+      <a class="btn btn-gold" href="#estimate">Start a Commercial Quote</a>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="mono">02 / Services</div><h2>Core services</h2></div>
+      <p>Every job inspected, documented and finished clean. Residential and commercial.</p>
+    </div>
+    <div class="svc-list">
+      <a class="svc-row" href="#estimate"><span class="n">SVC-01</span><svg><use href="#i-search"/></svg><h3>Troubleshooting</h3><p>Tripping breakers, dead circuits, flicker and faults — found and fixed.</p><span class="arr">→</span></a>
+      <a class="svc-row" href="#estimate"><span class="n">SVC-02</span><svg><use href="#i-panel"/></svg><h3>Panel Upgrades</h3><p>Service upgrades with proper load calculations and dedicated circuit design.</p><span class="arr">→</span></a>
+      <a class="svc-row" href="#estimate"><span class="n">SVC-03</span><svg><use href="#i-ev"/></svg><h3>EV Charging</h3><p>Home and commercial Level 2 charging station installation.</p><span class="arr">→</span></a>
+      <a class="svc-row" href="#estimate"><span class="n">SVC-04</span><svg><use href="#i-bulb"/></svg><h3>Lighting</h3><p>Repairs and installation, interior to parking lot.</p><span class="arr">→</span></a>
+      <a class="svc-row" href="#estimate"><span class="n">SVC-05</span><svg><use href="#i-home"/></svg><h3>Remodel Electrical</h3><p>Kitchen, basement, bath and bedroom remodels.</p><span class="arr">→</span></a>
+      <a class="svc-row" href="#estimate"><span class="n">SVC-06</span><svg><use href="#i-gen"/></svg><h3>Generators</h3><p>Standby generator installation and transfer switches.</p><span class="arr">→</span></a>
+      <a class="svc-row" href="#estimate"><span class="n">SVC-07</span><svg><use href="#i-wrench"/></svg><h3>Commercial Maintenance</h3><p>Component maintenance and scheduled inspections.</p><span class="arr">→</span></a>
+      <a class="svc-row" href="#estimate"><span class="n">SVC-08</span><svg><use href="#i-alert"/></svg><h3>Emergency Service</h3><p>Urgent electrical issues. [Hours / availability to confirm]</p><span class="arr">→</span></a>
+    </div>
+    <p class="more">Also: <span>Module programming</span><span>Load calculations</span><span>Dedicated circuits</span><span>Low-voltage</span><span>Appliance repairs</span><span>General maintenance</span></p>
+  </div>
+</section>
+
+<section class="why gridbg" id="about">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="mono">03 / Why us</div><h2>Specs that<br>matter</h2></div>
+      <p>Family-owned and detail-oriented — the kind of contractor that labels every breaker.</p>
+    </div>
+    <div class="why-grid">
+      <div><div class="k">20+</div><h3>Years Experience</h3><p>Two decades of residential and commercial work.</p></div>
+      <div><div class="k">LIC</div><h3>Licensed &amp; Bonded</h3><p>[License wording / # to confirm]</p></div>
+      <div><div class="k">FAM</div><h3>Family-Owned</h3><p>Owner on the job, not just the invoice.</p></div>
+      <div><div class="k">WAR</div><h3>Workmanship Warranty</h3><p>[Terms to confirm]</p></div>
+      <div><div class="k">LOC</div><h3>Local</h3><p>Naperville-based, western suburbs-wide.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="mono">04 / Field log</div><h2>Recent work</h2></div>
+      <p>Real trucks, real panels, real job sites. No stock photos.</p>
+    </div>
+    <div class="work-grid">
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Work truck — feature photo</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Panel install</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>EV charger</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Commercial lighting retrofit</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Generator</b></div></div>
+      <div class="ph"><div><svg><use href="#i-cam"/></svg><b>Remodel</b></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="areas">
+  <div class="wrap">
+    <div class="area gridbg">
+      <div class="mono">05 / Coverage</div>
+      <h2>Service area</h2>
+      <p style="color:var(--muted);margin:0">Naperville HQ, covering the western suburbs.</p>
+      <div class="map" aria-hidden="true">
+        <svg class="roads" viewBox="0 0 400 300" preserveAspectRatio="none"><g stroke="#2f3843" stroke-width="2" fill="none"><path d="M0 120 L400 110"/><path d="M180 0 L200 300"/><path d="M0 220 L400 180"/><path d="M60 0 L120 300"/><path d="M320 0 L300 300"/></g><circle cx="190" cy="150" r="90" fill="none" stroke="#f2b705" stroke-width="1" stroke-dasharray="4 5" opacity=".6"/></svg>
+        <span class="pin hq" style="left:48%;top:50%">Naperville</span>
+        <span class="pin" style="left:56%;top:12%">Wheaton</span>
+        <span class="pin" style="left:80%;top:20%">Glen Ellyn</span>
+        <span class="pin" style="left:76%;top:40%">Lisle</span>
+        <span class="pin" style="left:82%;top:62%">Woodridge</span>
+        <span class="pin" style="left:18%;top:38%">Aurora</span>
+        <span class="pin" style="left:20%;top:76%">Oswego</span>
+        <span class="pin" style="left:46%;top:82%">Plainfield</span>
+        <span class="pin" style="left:76%;top:90%">Will County</span>
+      </div>
+      <ul class="townlist"><li>Naperville</li><li>Plainfield</li><li>Wheaton</li><li>Lisle</li><li>Aurora</li><li>Oswego</li><li>Woodridge</li><li>Glen Ellyn</li><li>Will County</li></ul>
+    </div>
+    <div class="est" id="estimate">
+      <div class="mono">06 / Estimate</div>
+      <h2>Request an estimate</h2>
+      <p class="note">Or call <a href="tel:+13125454972" style="color:var(--gold)">(312) 545-4972</a> · Text · WhatsApp</p>
+      <form onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ Mockup — not wired yet';">
+        <div class="full toggle"><input type="radio" name="t" id="b-res"><label for="b-res">Residential</label><input type="radio" name="t" id="b-com" checked><label for="b-com">Commercial</label></div>
+        <div><label for="b-name">Name</label><input id="b-name" placeholder="Full name"></div>
+        <div><label for="b-phone">Phone</label><input id="b-phone" type="tel" placeholder="(630) 555-0123"></div>
+        <div class="full"><label for="b-email">Email</label><input id="b-email" type="email" placeholder="you@business.com"></div>
+        <div class="full"><label for="b-svc">Service</label><select id="b-svc"><option>Select service</option><option>Commercial maintenance</option><option>Troubleshooting</option><option>Panel upgrade</option><option>EV charging</option><option>Lighting</option><option>Remodel electrical</option><option>Generator</option><option>Emergency</option><option>Other</option></select></div>
+        <div class="full"><label for="b-desc">Project details</label><textarea id="b-desc" placeholder="Facility type, location, what needs attention…"></textarea></div>
+        <div class="full"><label>Preferred contact</label>
+          <div class="pills"><input type="radio" name="c" id="b-c1" checked><label for="b-c1">Call</label><input type="radio" name="c" id="b-c2"><label for="b-c2">Text</label><input type="radio" name="c" id="b-c3"><label for="b-c3">WhatsApp</label><input type="radio" name="c" id="b-c4"><label for="b-c4">Email</label></div></div>
+        <div class="full note">Photo upload: optional — planned for Phase 2.</div>
+        <div class="full"><button class="btn btn-gold" style="width:100%">Submit Request →</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="#"><span class="badge" aria-hidden="true"></span><span class="name">Volts &amp; Watts<small>ELECTRICAL SERVICES</small></span></a>
+    <span>Licensed &amp; Bonded · [License # TBD] · Naperville, IL</span>
+    <a href="tel:+13125454972" style="color:var(--gold);text-decoration:none;font-weight:600">(312) 545-4972</a>
+  </div>
+</footer>
+
+<nav class="mbar" aria-label="Mobile contact">
+  <a href="tel:+13125454972"><svg><use href="#i-phone"/></svg>Call</a>
+  <a href="sms:+13125454972"><svg><use href="#i-sms"/></svg>Text</a>
+  <a href="https://wa.me/13125454972?text=Hi%20Volts%20%26%20Watts%2C%20I%27d%20like%20to%20request%20an%20estimate."><svg><use href="#i-wa"/></svg>WhatsApp</a>
+  <a class="est" href="#estimate"><svg><use href="#i-form"/></svg>Estimate</a>
+</nav>
+</body>
+</html>
