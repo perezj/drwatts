@@ -1,8 +1,23 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "drwatts",
+  "main": "src/index.js",
   "compatibility_date": "2026-10-01",
   "assets": {
-    "directory": "./site"
+    "directory": "./site",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "drwatts-leads",
+      "database_id": "f46b088a-d3db-445f-b4fc-df41af162461",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "ADMIN_EMAIL": "perezj@gmail.com",
+    "LEAD_RECIPIENT_EMAIL": "drwattscedeno@voltsandwatts.net",
+    "RESEND_FROM_EMAIL": "Volts & Watts <leads@voltsandwatts.net>"
   }
 }

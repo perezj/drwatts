@@ -27,6 +27,14 @@
   "knowsAbout": ["EV charging station installation", "Electrical panel upgrades", "Generator installation", "Electrical troubleshooting", "Lighting installation", "Commercial electrical maintenance"]
 }
 </script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RTBS3F3PNJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RTBS3F3PNJ');
+</script>
 <style>
   :root {
     --bg: #101418;
@@ -59,9 +67,9 @@
 
   header.nav { position: sticky; top: 0; z-index: 30; background: var(--bg-2); border-bottom: 1px solid var(--line); }
   .nav .wrap { display: flex; align-items: stretch; justify-content: space-between; height: 72px; }
-  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .brand .badge { width: 44px; height: 44px; border-radius: 4px; background: #000 url(assets/volts-watts-logo.jpg) 50% 45%/260% no-repeat; border: 1px solid #3a3a30; flex: none; }
-  .brand .name { font: 800 22px/1 "Barlow Condensed"; text-transform: uppercase; letter-spacing: .04em; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
+  .brand .badge { width: 58px; height: 44px; border-radius: 4px; background: #000 url(assets/volts-watts-logo.jpg) center/contain no-repeat; border: 1px solid #3a3a30; flex: none; }
+  .brand .name { font: 800 22px/1 "Barlow Condensed"; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
   .brand .name small { display: block; font: 500 10px "IBM Plex Mono"; color: var(--muted); letter-spacing: .14em; margin-top: 3px; }
   .nav ul { display: flex; list-style: none; margin: 0; padding: 0; }
   .nav ul a { display: flex; align-items: center; height: 100%; padding: 0 18px; text-decoration: none; font: 600 15px "Barlow Condensed"; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-left: 1px solid var(--line); }
@@ -197,8 +205,15 @@
   .pills label { margin: 0; border: 1px solid #3a4450; padding: 8px 14px; color: var(--text); cursor: pointer; font: 600 14px Barlow; text-transform: none; letter-spacing: 0; }
   .pills input:checked + label { border-color: var(--gold); color: var(--gold); }
   .note { font-size: 13px; color: var(--muted); }
-  .send { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .send { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .err { color: #ff8f8a; font-size: 14px; min-height: 1em; }
+  dialog.success-dialog { width: min(480px, calc(100% - 32px)); border: 1px solid var(--gold); border-radius: 4px; padding: 0; background: var(--panel); color: var(--text); box-shadow: 0 24px 80px rgba(0,0,0,.55); }
+  dialog.success-dialog::backdrop { background: rgba(4,7,10,.78); backdrop-filter: blur(3px); }
+  .success-dialog .dialog-body { padding: 30px; }
+  .success-dialog .mono { margin-bottom: 12px; }
+  .success-dialog h2 { font-size: 38px; margin-bottom: 12px; }
+  .success-dialog p { color: var(--muted); margin: 0 0 24px; }
+  .success-dialog .dialog-close { width: 100%; }
 
   footer { padding: 46px 0 110px; color: var(--muted); font-size: 14px; }
   footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
@@ -230,8 +245,11 @@
     .wrap { padding: 0 16px; }
     .util .links { display: none; }
     .util .wrap { font-size: 12px; }
-    .nav .cta { padding: 0 16px; font-size: 15px; }
-    .brand .name { font-size: 19px; }
+    .nav .cta { padding: 0 14px; font-size: 15px; }
+    .brand { gap: 8px; }
+    .brand .badge { width: 52px; height: 40px; }
+    .brand .name { font-size: 18px; }
+    .brand .name small { font-size: 8px; letter-spacing: .1em; }
     section { padding: 64px 0; }
     .head { grid-template-columns: minmax(0, 1fr); gap: 14px; }
     .head p { justify-self: start; }
@@ -448,7 +466,7 @@
     <div class="est" id="estimate">
       <div class="mono">06 / Estimate</div>
       <h2>Watt can we do for you?</h2>
-      <p class="note">Fill this in and we'll open a ready-to-send message to us by text or WhatsApp. Prefer talking? Call <a href="tel:+13125454972" style="color:var(--gold)">(312) 545-4972</a>.</p>
+      <p class="note">Send us your request by email, text or WhatsApp. Prefer talking? Call <a href="tel:+13125454972" style="color:var(--gold)">(312) 545-4972</a>.</p>
       <form id="est-form" novalidate>
         <div class="full toggle" role="radiogroup" aria-label="Project type"><input type="radio" name="type" id="t-com" value="Commercial" checked><label for="t-com">Commercial</label><input type="radio" name="type" id="t-res" value="Residential"><label for="t-res">Residential</label></div>
         <div><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" placeholder="Full name" required></div>
@@ -460,6 +478,7 @@
           <div class="pills" role="radiogroup" aria-labelledby="pc-l"><input type="radio" name="contact" id="c1" value="Call" checked><label for="c1">Call</label><input type="radio" name="contact" id="c2" value="Text"><label for="c2">Text</label><input type="radio" name="contact" id="c3" value="WhatsApp"><label for="c3">WhatsApp</label><input type="radio" name="contact" id="c4" value="Email"><label for="c4">Email</label></div></div>
         <div class="full err" id="f-err" role="alert"></div>
         <div class="full send">
+          <button class="btn btn-gold" type="submit" data-via="email"><svg><use href="#i-form"/></svg>Send by Email</button>
           <button class="btn btn-gold" type="submit" data-via="sms"><svg><use href="#i-sms"/></svg>Send by Text</button>
           <button class="btn btn-line" type="submit" data-via="wa"><svg><use href="#i-wa"/></svg>Send on WhatsApp</button>
         </div>
@@ -468,6 +487,15 @@
   </div>
 </section>
 </main>
+
+<dialog class="success-dialog" id="success-dialog" aria-labelledby="success-title">
+  <div class="dialog-body">
+    <div class="mono">Request received</div>
+    <h2 id="success-title">You're on our list.</h2>
+    <p>Thanks for reaching out. We have your project details and will be in touch soon.</p>
+    <button class="btn btn-gold dialog-close" type="button">Done</button>
+  </div>
+</dialog>
 
 <footer>
   <div class="wrap">
@@ -488,12 +516,18 @@
   (function () {
     var form = document.getElementById('est-form');
     var err = document.getElementById('f-err');
+    var successDialog = document.getElementById('success-dialog');
+    var closeDialog = successDialog.querySelector('.dialog-close');
     var PHONE = '13125454972';
     var via = 'sms';
     form.querySelectorAll('button[data-via]').forEach(function (b) {
       b.addEventListener('click', function () { via = b.dataset.via; });
     });
-    form.addEventListener('submit', function (e) {
+    closeDialog.addEventListener('click', function () { successDialog.close(); });
+    successDialog.addEventListener('click', function (e) {
+      if (e.target === successDialog) successDialog.close();
+    });
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var d = new FormData(form);
       var name = (d.get('name') || '').trim();
@@ -514,10 +548,31 @@
       if (d.get('service')) lines.push('Service: ' + d.get('service'));
       if (d.get('details')) lines.push('Details: ' + d.get('details').trim());
       lines.push('Preferred contact: ' + d.get('contact'));
-      var msg = encodeURIComponent(lines.join('\n'));
-      window.location.href = via === 'wa'
-        ? 'https://wa.me/' + PHONE + '?text=' + msg
-        : 'sms:+' + PHONE + '?&body=' + msg;
+      try {
+        var response = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: d.get('type'), name: name, phone: phone, email: d.get('email'),
+            service: d.get('service'), details: d.get('details'), contact: d.get('contact')
+          })
+        });
+        if (!response.ok) throw new Error('Unable to save your request. Please call us at (312) 545-4972.');
+        if (typeof gtag === 'function') {
+          gtag('event', 'generate_lead', { method: via, service: d.get('service') || 'unspecified' });
+        }
+        if (via === 'email') {
+          form.reset();
+          successDialog.showModal();
+          return;
+        }
+        var msg = encodeURIComponent(lines.join('\n'));
+        window.location.href = via === 'wa'
+          ? 'https://wa.me/' + PHONE + '?text=' + msg
+          : 'sms:+' + PHONE + '?&body=' + msg;
+      } catch (error) {
+        err.textContent = error.message;
+      }
     });
   })();
 </script>
